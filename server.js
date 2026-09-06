@@ -1,17 +1,10 @@
-const dotenv = require("dotenv");
-dotenv.config();
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const logger = require("morgan");
 const petsCtrl = require("./controllers/petsCtrl.js");
 const cors = require("cors");
 
-mongoose.connect(process.env.MONGODB_URI);
-
-mongoose.connection.on("connected", () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-});
+require("./database/database.js");
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors());
 app.use(express.json());
