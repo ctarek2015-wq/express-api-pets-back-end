@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const logger = require("morgan");
+const petsCtrl = require("./controllers/petsCtrl.js");
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(logger("dev"));
 
 // Routes go here
+app.get("/pets", petsCtrl.index);
+app.post("/pets", petsCtrl.create);
 
 app.listen(3000, () => {
   console.log("The express app is ready!");
